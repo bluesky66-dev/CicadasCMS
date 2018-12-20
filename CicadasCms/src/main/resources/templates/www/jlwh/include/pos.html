@@ -1,0 +1,15 @@
+<div class="n_top">
+    <div class="n_top_con">
+        <#cms_site_pos  site="${site}" category="${category}"  var="bean">
+            您的位置：
+                ${bean.baseURL}
+            >
+            @for(location in bean.locations){
+                <a href="${location.url}">${location.categoryName}</a>
+                    @if(!locationLP.last){
+                        >
+                    @}
+            @}
+    </#cms_site_pos>
+    </div>
+</div>

@@ -1,0 +1,167 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="HandheldFriendly" content="true">
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no" />
+    <title>首页 - ${site.siteName!}</title>
+    <link rel="stylesheet" type="text/css" href="${resPath}/jlwh/style/index.css"/>
+    <link rel="stylesheet" type="text/css" href="${resPath}/jlwh/style/common.css"/>
+    <link rel="stylesheet" type="text/css" href="${resPath}/jlwh/style/sp.css"/>
+    <link rel="stylesheet" type="text/css" href="${resPath}/jlwh/style/animate.css"/>
+    <script type="text/javascript" src="${resPath}/jlwh/scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="${resPath}/jlwh/scripts/wow.min.js"></script>
+    <script type="text/javascript" src="${resPath}/jlwh/scripts/js.js"></script>
+    <script>
+        new WOW().init();
+    </script>
+</head>
+
+<body>
+<!--header begin-->
+@includeFileTemplate("/www/jlwh/include/header.html",{"current":"index"}){}
+<!--header end-->
+<!--banner-->
+<div class="clear"></div>
+<div class="fullSlide">
+    <div class="bd">
+        <ul>
+            <#cms_index_silder titleLen="10" size="5" var="bean">
+                <li _src="url(${bean.img!})" style="background: center 0 no-repeat;">
+                    <a target="_blank" href="${bean.url!}"></a>
+                </li>
+            </#cms_index_silder>
+        </ul>
+    </div>
+    <div class="hd"><ul></ul></div>
+    <span class="prev"></span>
+    <span class="next"></span>
+</div>
+<script type="text/javascript">
+    /* 控制左右按钮显示 */
+    jQuery(".fullSlide").hover(function(){ jQuery(this).find(".prev,.next").stop(true,true).fadeTo("show",0.5) },function(){ jQuery(this).find(".prev,.next").fadeOut() });
+    /* 调用SuperSlide */
+    jQuery(".fullSlide").slide({ titCell:".hd ul", mainCell:".bd ul", effect:"fold",  autoPlay:true, interTime:4000, autoPage:true, trigger:"click",
+        startFun:function(i){
+            var curLi = jQuery(".fullSlide .bd li").eq(i); /* 当前大图的li */
+            if( !!curLi.attr("_src") ){
+                curLi.css("background-image",curLi.attr("_src")).removeAttr("_src") /* 将_src地址赋予li背景，然后删除_src */
+            }
+        }
+    });
+</script>
+<!--主体-->
+<div class="container">
+    <div class="s_news">
+        <div class="s_news_box">
+            <div class="s_news_top">
+                <div class="s_news_t01">
+                    <div class="s_news_con">
+                        <ul class="s_news_list yc">
+                            <#cms_content_list  siteId="${site.siteId}" categoryId="196"  orderBy="2" isHot="0"    hasChild="1" isRecommend="1"  size="5"   titleLen="20"   var="bean">
+                            <li>
+                                <a href="${bean.url!}">${bean.title!}</a>
+                                <em>${bean.inputdate,dateFormat="yyyy.MM.dd"}</em>
+                            </li>
+                           </#cms_content_list>
+                        </ul>
+                    </div>
+                    <div class="s_news_more">
+                        <a href="${frontPath}/${site.siteId}/196.html">更多新闻</a>
+                    </div>
+                    <script>
+                        jQuery(".s_news_t01").slide({ mainCell:".s_news_list", effect:"topLoop", autoPlay:true, delayTime:300});
+                    </script>
+                </div>
+                <div class="s_news_search">
+                    <input type="text" placeholder="请输入搜索关键字" class="s_search_text">
+                    <!--<b><img src="${resPath}/jlwh/images/tm_12.png" alt=""></b>-->
+                    <!--<select class="s_news_slt">-->
+                        <!--<option>新闻</option>-->
+                        <!--<option>行业新闻</option>-->
+                        <!--<option>公司新闻</option>-->
+                    <!--</select>-->
+                    <button class="s_search_btn"></button>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+            <div class="s_news_lf fl">
+                <div class="s_title01">
+                    <span>新闻中心</span>
+                    <em><a href="${frontPath}/${site.siteId}/184.html">more &gt;</a></em>
+                </div>
+                <ul class="s_list01">
+                    <#cms_content_list  siteId="${site.siteId}" categoryId="184"  orderBy="2" isHot="0"  isPic="1"   hasChild="1" isRecommend="0"  size="3"   titleLen="20"   var="bean">
+                    <li>
+                        <span>
+                            <a href="${bean.url!}"><img src="${bean.thumb!}" width="150" height="93" alt=""></a>
+                        </span>
+                        <samp>
+                            <h3 class="yc"><a href="${bean.url!}">${bean.title!}</a><em>${bean.inputdate,dateFormat="yyyy.MM.dd"}</em></h3>
+                            <p>
+                               ${bean.description!}
+                            </p>
+                            <i><a href="${bean.url!}">[全文]</a></i>
+                        </samp>
+                    </li>
+                  </#cms_content_list>
+                </ul>
+            </div>
+            <div class="s_news_rt fr">
+                <div class="s_title01">
+                    <span>党群工作</span>
+                    <em><a href="${frontPath}/${site.siteId}/186.html">more &gt;</a></em>
+                </div>
+                <div class="s_gz">
+                    <ul class="s_gz_list yc">
+                        <#cms_content_list  siteId="${site.siteId}" categoryId="186"  orderBy="2" isHot="0"  isPic="1"   hasChild="1" isRecommend="0"  size="3"   titleLen="20"   var="bean">
+                        <li>
+                            <a href="${bean.url!}">
+                                <img src="${bean.thumb!}" width="480" height="320" alt="${bean.title!}">
+                            </a>
+                            <span>
+                                <a href="${bean.url!}">${bean.title!}</a>
+                            </span>
+                        </li>
+                    </#cms_content_list>
+                    </ul>
+                    <ul class="s_gs_hd"></ul>
+                </div>
+                <script>
+                    jQuery(".s_gz").slide({titCell:".s_gs_hd",mainCell:".s_gz_list",autoPage:true,effect:"fade",autoPlay:true});
+                </script>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="s_xm">
+        <div class="s_xm_con wow bounceInUp" data-wow-duration="2s" data-wow-delay="0.2s">
+            <ul class="s_xm_list">
+                <#cms_category_list  siteId="${site.siteId}" categoryId="191" isNav="0"   var="bean">
+                <li>
+                    <a href="${bean.url}">
+                        <span>
+                            <img src="${bean.categoryIcon}" width="360" height="236" alt="">
+                        </span>
+                        <samp>
+                            <h3>${bean.categoryName}</h3>
+                            <i>查看详情</i>
+                        </samp>
+                    </a>
+                </li>
+                </#cms_category_list>
+            </ul>
+            <div class="s_xm_more">
+                <a href="${frontPath}/${site.siteId}/192.html"><img src="${resPath}/jlwh/images/tm_31.png" alt=""></a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- footer begin-->
+@includeFileTemplate("/www/jlwh/include/footer.html"){}
+<!-- footer end-->
+</body>
+</html>

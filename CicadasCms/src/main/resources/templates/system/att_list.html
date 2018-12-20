@@ -1,0 +1,72 @@
+<div class="bjui-pageHeader">
+    <form id="pagerForm" data-toggle="ajaxsearch" action="${ctxPath}/system/attachment" method="post">
+        <input type="hidden" name="pageSize" value="${model.pageSize!}">
+        <input type="hidden" name="pageCurrent" value="${model.pageNum!}">
+        <div class="bjui-searchBar">
+           <div class="pull-right">
+                <!--<button type="button" class="btn-blue" data-url="ajaxDone2.html?id={#bjui-selected}" data-toggle="doajax" data-confirm-msg="确定要删除选中项吗？" data-icon="remove" title="可以在控制台(network)查看被删除ID">删除选中行</button>&nbsp;-->
+                <div class="btn-group">
+                    <button type="button" class="btn-default dropdown-toggle" data-toggle="dropdown" data-icon="copy">复选框-批量操作<span class="caret"></span></button>
+                    <ul class="dropdown-menu right" role="menu">
+                        <!--<li><a href="book1.xlsx" data-toggle="doexport" data-confirm-msg="确定要导出信息吗？">导出<span style="color: green;">当前页</span></a></li>-->
+                        <!--<li class="divider"></li>-->
+                        <li><a href="${ctxPath}/system/attachment/delete" data-toggle="doajaxchecked" data-confirm-msg="确定要删除选中项吗？" data-idname="ids" data-group="ids">删除选中</a></li>
+                        <!--<li><a href="ajaxDone2.html" data-toggle="doajaxchecked" data-confirm-msg="确定要删除选中项吗？" data-idname="delids" data-group="ids">删除选中</a></li>-->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="bjui-pageContent tableContent">
+    <table class="table table-bordered table-hover table-striped table-top" data-selected-multi="true">
+        <thead>
+            <tr>
+                <th align="center"  width="25">编号</th>
+                <th align="center"  width="90">文件名</th>
+                <th align="center"  width="80">文件类型</th>
+                <th align="center"  width="80">上传者</th>
+                <th align="center"  width="100">上传时间</th>
+                <th align="center"  width="100">IP地址</th>
+                <th align="center"  width="100">文件大小</th>
+                <th align="center"  width="100">文件位置</th>
+                <th align="center"  width="26" ><input type="checkbox" class="checkboxCtrl" data-group="ids" data-toggle="icheck"></th>
+                <th align="center"  width="60">操作</th>
+            </tr>
+        </thead>
+        <tbody>
+        @for(file in model.list){
+            <tr data-id="${fileLP.index}">
+                <td align="center">${file.id!}</td>
+                <td align="center"><a target="_blank" href="${file.url!}">${file.fileName!}</a></td>
+                <td align="center">${file.fileExtname!}</td>
+                <td align="center">${file.username!}</td>
+                <td align="center">${file.uploadDate,dateFormat="yyyy/MM/dd HH:mm:ss"}</td>
+                <td align="center">${file.uploadIp,dateFormat="yyyy/MM/dd HH:mm:ss"}</td>
+                <td align="center">${file.fileSize!}KB</td>
+                <td align="center"><a href="Javascript:void(0);" data-toggle="alertmsg" data-msg="${file.filePath!}" data-type="info">存储位置</a></td>
+                <td  align="center"><input type="checkbox" name="ids" data-toggle="icheck" value="${file.id!}"></td>
+                <td  align="center">
+                   <a href="${ctxPath}/system/attachment/delete?ids=${file.id!}" class="btn btn-red" data-toggle="doajax" data-confirm-msg="确定要删除该行信息吗？">删</a>
+                </td>
+            </tr>
+        @}
+        </tbody>
+    </table>
+</div>
+<div class="bjui-pageFooter">
+    <div class="pages">
+        <span>每页&nbsp;</span>
+        <div class="selectPagesize">
+            <select data-toggle="selectpicker" data-toggle-change="changepagesize">
+                <option value="30">30</option>
+                <option value="60">60</option>
+                <option value="120">120</option>
+                <option value="150">150</option>
+            </select>
+        </div>
+        <span>&nbsp;条，共 ${model.total!} 条</span>
+    </div>
+    <div class="pagination-box" data-toggle="pagination" data-total="${model.total!}" data-page-size="30" data-page-current="1">
+    </div>
+</div>

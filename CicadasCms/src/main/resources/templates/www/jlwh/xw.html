@@ -1,0 +1,129 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="HandheldFriendly" content="true">
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no" />
+    <title>官网</title>
+    <link rel="stylesheet" type="text/css" href="${resPath}/jlwh/style/index.css"/>
+    <link rel="stylesheet" type="text/css" href="${resPath}/jlwh/style/common.css"/>
+    <link rel="stylesheet" type="text/css" href="${resPath}/jlwh/style/sp.css"/>
+    <link rel="stylesheet" type="text/css" href="${resPath}/jlwh/style/animate.css"/>
+    <script type="text/javascript" src="${resPath}/jlwh/scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="${resPath}/jlwh/scripts/wow.min.js"></script>
+    <script type="text/javascript" src="${resPath}/jlwh/scripts/js.js"></script>
+    <script>
+        new WOW().init();
+    </script>
+</head>
+
+<body>
+<!--header begin-->
+@includeFileTemplate("/www/jlwh/include/header.html"){}
+<!--header end-->
+
+<!--主体-->
+<div class="container">
+    <!--pos begin-->
+    @includeFileTemplate("/www/jlwh/include/pos.html"){}
+    <!--pos end-->
+    <div class="row">
+        <div class="n_content">
+            <div class="n_lf">
+                <#cms_category  categoryId="${category.categoryId}" isParent="1" var="bean">
+                <div class="s_title01">
+                    <span>${bean.categoryName!}</span>
+                </div>
+                <ul class="n_lf_list">
+                    <#cms_category_list  siteId="${site.siteId}" categoryId="${bean.categoryId!}" isNav="0"   var="bean">
+                    @if(isNotEmpty(category)&&category.categoryId==bean.categoryId){
+                    <li class="current">
+                        <a href="${bean.url!}">${bean.categoryName!}</a>
+                    </li>
+                    @}else{
+                    <li>
+                        <a href="${bean.url!}">${bean.categoryName!}</a>
+                    </li>
+                    @}
+                </#cms_category_list>
+                </ul>
+            </#cms_category>
+            </div>
+            <div class="n_rt">
+                <div class="n_title">
+                    <h1>${category.categoryName!}</h1>
+                    <em><img src="${resPath}/jlwh/images/t-x.png" alt=""></em>
+                    <i>${category.alias!}</i>
+                </div>
+                <div class="n_news_top">
+                    <div class="n_news_bd">
+                        <ul class="yc">
+                            <#cms_content_list  siteId="${site.siteId}" categoryId="${category.categoryId}"  orderBy="2" isHot="0"  isPic="1"   hasChild="1" isRecommend="1"  size="3"   titleLen="20"   var="bean">
+                            <li>
+                                <span>
+                                    <a href="${bean.url}"><img src="${bean.thumb}" width="400" height="240"></a>
+                                </span>
+                                <samp>
+                                    <h3><a href="${bean.url}">${bean.title}</a></h3>
+                                    <p>
+                                        ${bean.description!}
+                                    </p>
+                                </samp>
+                            </li>
+                        </#cms_content_list>
+                        </ul>
+                    </div>
+                    <ul class="n_news_hd">
+                        <li></li>
+                        <li></li>
+                    </ul>
+                </div>
+                <script>
+                    jQuery(".n_news_top").slide({titCell:".n_news_hd",mainCell:".n_news_bd ul",autoPage:true,effect:"fade",autoPlay:true});
+                </script>
+                <ul class="s_list01 n_add_cs">
+                    <#cms_content_page  siteId="${site.siteId!}"  titleLen="30" page="${page!}" var="content">
+                    <li>
+                        <span>
+                            <a href="${content.url!}"><img src="${content.thumb!}" width="150" height="93" alt=""></a>
+                        </span>
+                        <samp>
+                            <h3 class="yc"><a href="${content.url!}">${content.title!}</a><em>${content.inputdate!,dateFormat="yyyy.MM.dd"}</em></h3>
+                            <p>
+                                ${content.description!}......
+                            </p>
+                            <i><a href="${content.url!}">[全文]</a></i>
+                        </samp>
+                    </li>
+                    </#cms_content_page>
+                </ul>
+                <div style=" margin-bottom:30px;margin-top:30px;">
+                    <ul class="pag">
+                        <#cms_pagination siteId="${site.siteId}" categoryId="${category.categoryId}" page="${page}" moreNum="6"  var="page" >
+                        <li>${page.first}</li>
+                        @for( change in page.changePage){
+                        @if(!change.isLink){
+                        @if(change.isMore){
+                        <li>${change.value!}</li>
+                        @}else{
+                        <li class="current">${change.value!}</li>
+                        @}
+                        @}else{
+                        <li> ${change.url!}</li>
+                        @}
+                        @}
+                        <li>${page.next}</li>
+                        </#cms_pagination>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- footer begin-->
+@includeFileTemplate("/www/jlwh/include/footer.html"){}
+<!-- footer end-->
+</body>
+</html>

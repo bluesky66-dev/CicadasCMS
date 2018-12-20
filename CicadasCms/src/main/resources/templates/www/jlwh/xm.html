@@ -1,0 +1,138 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="HandheldFriendly" content="true">
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no" />
+    <title>${category.categoryName!} - ${site.siteName!}</title>
+    <link rel="stylesheet" type="text/css" href="${resPath}/jlwh/style/index.css"/>
+    <link rel="stylesheet" type="text/css" href="${resPath}/jlwh/style/common.css"/>
+    <link rel="stylesheet" type="text/css" href="${resPath}/jlwh/style/sp.css"/>
+    <link rel="stylesheet" type="text/css" href="${resPath}/jlwh/style/swiper.min.css"/>
+    <link rel="stylesheet" type="text/css" href="${resPath}/jlwh/style/animate.css"/>
+    <script type="text/javascript" src="${resPath}/jlwh/scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="${resPath}/jlwh/scripts/swiper.min.js"></script>
+    <script type="text/javascript" src="${resPath}/jlwh/scripts/wow.min.js"></script>
+    <script type="text/javascript" src="${resPath}/jlwh/scripts/js.js"></script>
+    <script>
+        new WOW().init();
+    </script>
+</head>
+
+<body>
+<!--header begin-->
+@includeFileTemplate("/www/jlwh/include/header.html"){}
+<!--header end-->
+
+<!--主体-->
+<div class="container">
+    <!--pos begin-->
+    @includeFileTemplate("/www/jlwh/include/pos.html"){}
+    <!--pos end-->
+    <div class="row">
+        <div class="n_content">
+            <div class="n_lf">
+                <#cms_category  categoryId="${category.categoryId}" isParent="1" var="bean">
+                <div class="s_title01">
+                    <span>${bean.categoryName!}</span>
+                </div>
+                <ul class="n_lf_list">
+                    <#cms_category_list  siteId="${site.siteId}" categoryId="${bean.categoryId!}" isNav="0"   var="bean">
+                    @if(isNotEmpty(category)&&category.categoryId==bean.categoryId){
+                    <li class="current">
+                        <a href="${bean.url!}">${bean.categoryName!}</a>
+                    </li>
+                    @}else{
+                    <li>
+                        <a href="${bean.url!}">${bean.categoryName!}</a>
+                    </li>
+                    @}
+                </#cms_category_list>
+                </ul>
+            </#cms_category>
+        </div>
+        <div class="n_rt">
+            <div class="n_title">
+                <h1>${category.categoryName!}</h1>
+                <em><img src="${resPath}/jlwh/images/t-x.png" alt=""></em>
+                <i>${category.alias!}</i>
+            </div>
+            <div id="certify">
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                        <#cms_content_list  siteId="${site.siteId}" categoryId="${category.categoryId!}"  orderBy="2" isHot="0"  isPic="1"   hasChild="1" isRecommend="1"  size="3"   titleLen="20"   var="bean">
+
+                        <div class="swiper-slide">
+                            <img src="${bean.thumb!}" width="430" height="290" />
+                            <p>${bean.title}</p>
+                        </div>
+                    </#cms_content_list>
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        </div>
+        <script>
+            window.onload=function(){
+                certifySwiper = new Swiper('#certify .swiper-container', {
+                    watchSlidesProgress: true,
+                    slidesPerView: 'auto',
+                    centeredSlides: true,
+                    loop: true,
+                    loopedSlides: 3,
+                    autoplay:false,
+                    navigation: {
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
+                    },
+                    pagination: {
+                        el: '.swiper-pagination',
+                        //clickable :true,
+                    },
+                    on: {
+                        progress: function(progress) {
+                            for (i = 0; i < this.slides.length; i++) {
+                                var slide = this.slides.eq(i);
+                                var slideProgress = this.slides[i].progress;
+                                modify = 1;
+                                if (Math.abs(slideProgress) > 1) {
+                                    modify = (Math.abs(slideProgress) - 1) * 0.3 + 1;
+                                }
+                                translate = slideProgress * modify * 210 + 'px';
+                                scale = 1 - Math.abs(slideProgress) /4;
+                                zIndex = 999 - Math.abs(Math.round(10 * slideProgress));
+                                slide.transform('translateX(' + translate + ') scale(' + scale + ')');
+                                slide.css('zIndex', zIndex);
+                                slide.css('opacity', 1);
+                                if (Math.abs(slideProgress) > 3) {
+                                    slide.css('opacity', 0);
+                                }
+                            }
+                        },
+                        setTransition: function(transition) {
+                            for (var i = 0; i < this.slides.length; i++) {
+                                var slide = this.slides.eq(i)
+                                slide.transition(transition);
+                            }
+
+                        }
+                    }
+
+                })
+            };
+        </script>
+        <div class="n_text">
+            ${category.content!}
+        </div>
+    </div>
+</div>
+</div>
+</div>
+<!-- footer begin-->
+@includeFileTemplate("/www/jlwh/include/footer.html"){}
+<!-- footer end-->
+</body>
+</html>

@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="HandheldFriendly" content="true">
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no" />
+    <title>${content.title} - ${site.siteName!}</title>
+    <link rel="stylesheet" type="text/css" href="${resPath}/jlwh/style/index.css"/>
+    <link rel="stylesheet" type="text/css" href="${resPath}/jlwh/style/common.css"/>
+    <link rel="stylesheet" type="text/css" href="${resPath}/jlwh/style/sp.css"/>
+    <link rel="stylesheet" type="text/css" href="${resPath}/jlwh/style/animate.css"/>
+    <script type="text/javascript" src="${resPath}/jlwh/scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="${resPath}/jlwh/scripts/wow.min.js"></script>
+    <script type="text/javascript" src="${resPath}/jlwh/scripts/js.js"></script>
+    <script>
+        new WOW().init();
+    </script>
+</head>
+
+<body>
+<!--header begin-->
+@includeFileTemplate("/www/jlwh/include/header.html"){}
+<!--header end-->
+
+<!--主体-->
+<div class="container">
+    <!--header begin-->
+    @includeFileTemplate("/www/jlwh/include/pos.html"){}
+    <!--header end-->
+    <div class="row">
+        <div class="n_content">
+            <div class="n_lf">
+            <#cms_category  categoryId="${category.categoryId}" isParent="1" var="bean">
+            <div class="s_title01">
+                <span>${bean.categoryName!}</span>
+            </div>
+            <ul class="n_lf_list">
+                <#cms_category_list  siteId="${site.siteId}" categoryId="${bean.categoryId!}" isNav="0"   var="bean">
+                @if(isNotEmpty(category)&&category.categoryId==bean.categoryId){
+                 <li class="current">
+                    <a href="${bean.url!}">${bean.categoryName!}</a>
+                 </li>
+                @}else{
+                <li>
+                <a href="${bean.url!}">${bean.categoryName!}</a>
+                </li>
+                @}
+            </#cms_category_list>
+            </ul>
+            </#cms_category>
+            </div>
+            <div class="n_rt">
+                <div class="n_title">
+                    <h1>${content.title}</h1>
+                    <!--<em><img src="${resPath}/jlwh/images/t-x.png" alt=""></em>-->
+                    <!--<i>发布日期:2018-01-01 </i>-->
+                </div>
+                    <div class="n_text">
+                      ${content.content!}
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- footer begin-->
+@includeFileTemplate("/www/jlwh/include/footer.html"){}
+<!-- footer end-->
+</body>
+</html>

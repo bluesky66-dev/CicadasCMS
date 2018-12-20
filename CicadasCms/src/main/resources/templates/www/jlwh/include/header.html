@@ -1,0 +1,40 @@
+<div class="header">
+    <div class="header_con">
+        <div class="logo">
+            <a href="#"><img src="${resPath}/jlwh/images/logo.png" alt=""> </a>
+        </div>
+        <div class="nav menu">
+            <ul>
+                @if(isNotEmpty(current)&&current=='index'){
+                <li class="on">
+                @}else{
+                <li>
+                @}
+                <a href="${baseURL!}">网站首页</a>
+                </li>
+                <#cms_category_list  siteId="${site.siteId}" categoryId="0" isNav="1" var="bean">
+                @if(isNotEmpty(category)&&(category.categoryId==bean.categoryId||category.parentId==bean.categoryId)){
+                <li class="on">
+                    @}else{
+                <li>
+                    @}
+                    <!--判断当前栏目是否包含子栏目，如果有的话就遍历输出子栏目-->
+                    @if(isNotEmpty(bean.hasChild)&&bean.hasChild){
+                    <a href="${bean.url!}">${bean.categoryName!}</a>
+                    <ul >
+                        <#cms_category_list  siteId="${site.siteId}" categoryId="${bean.categoryId!}" isNav="0" var="subBean">
+                        <li>
+                            <a href="${subBean.url!}">${subBean.categoryName!}</a>
+                        </li>
+                       </#cms_category_list>
+                    </ul>
+                    @}else{
+                    <a href="${bean.url!}" target="_blank">${bean.categoryName!}</a>
+                    @}
+                </li>
+                </#cms_category_list>
+            </ul>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>

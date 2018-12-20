@@ -1,0 +1,71 @@
+.header{width:100%; min-width: 1200px;background: #e9e3d7; }
+.header_con{width: 1200px; margin:0 auto;}
+.header_con .logo{float: left;}
+.header_con .logo img{display: block;}
+.header_con .nav{float: right;}
+
+.s_news{background:url("../images/t-bg.jpg") no-repeat top center; height: 537px;}
+.s_news_box{width: 1200px; margin: 0 auto; padding-top: 1px; padding-top: 45px;}
+.s_news_t01{ overflow: hidden;  float: left; margin-top: 5px;}
+.s_news_con{background: url("../images/tm_09.png") no-repeat left; padding-left: 25px; float: left;height: 24px; line-height: 24px; overflow: hidden;}
+.s_news_t01 .s_news_list li{font-size: 14px;color: #b38662; overflow: hidden; width: 430px; }
+.s_news_t01 .s_news_list li a{color: #b38662;font-size: 14px; width:350px; display: block; float: left;}
+.s_news_t01 .s_news_list li em{float:right; display: block;}
+.s_news_more{ float: left; margin-left: 10px; }
+.s_news_more a{display: block; color: #FFF;background: #b38662; padding: 0px 10px; border-radius: 10px;}
+.s_news_more a:hover{color: #FFF; background: #d9b497;}
+
+.s_news_search{float: right;border: 1px solid #d4beab; overflow: hidden;}
+.s_news_search .s_search_text{background:none; border: none; margin: 8px 5px 0px 5px; float: left;}
+.s_news_search .s_news_slt{float: left; margin-top: 5px; background: none; border: none;}
+.s_news_search .s_search_btn{background: url("../images/tm_06.png") no-repeat; width: 36px; height: 33px; border: none; display: block; float: right;}
+.s_news_search b{float: left; margin-top: 6px; margin-right: 5px;}
+
+.s_news_lf{width: 680px; margin-top:30px;}
+.s_title01{ background: url("../images/tm_22.png") repeat-x;height: 36px; line-height: 36px; position: relative;padding-left: 37px;padding-right: 29px; overflow: hidden;}
+.s_title01:after{content: " ";background: url("../images/tm_21.png") no-repeat; width: 37px; height: 36px; display: block; position: absolute;left: 0px; top: 0px; }
+.s_title01:before{content: " ";background: url("../images/tm_23.png") no-repeat; width: 29px; height: 36px; display: block; position: absolute;right: 0px; top: 0px; }
+.s_title01 span{font-size: 16px;color: #613c00;float: left;}
+.s_title01 em{float: right;}
+.s_title01 em a{font-size: 14px;color: #613c00; }
+
+
+.s_list01{overflow: hidden;}
+.s_list01 li{ overflow: hidden; margin-top: 20px;}
+.s_list01 li span{float: left;}
+.s_list01 li span img{display: block;}
+.s_list01 li samp{display: block;width: 500px; float: right; border-bottom: 1px dashed #c6c5c2;}
+.s_list01 li samp h3{overflow: hidden;}
+.s_list01 li samp h3 a{display: block; float: left; font-size: 14px; width:350px;}
+.s_list01 li samp h3 em{font-size: 14px; float: right;}
+.s_list01 li samp p{font-size: 12px; height: 45px; overflow: hidden; color: #767676;}
+.s_list01 li samp i{float: right;}
+.s_list01 li samp i a{color: #767676;}
+
+.s_news_rt{ width: 480px; float: right; margin-top: 30px;}
+.s_gz{margin-top: 20px; position: relative;}
+.s_gz_list li{position: relative;}
+.s_gz_list li img{display: block;}
+.s_gz_list li span{position: absolute; left: 0px; bottom: 0px; height: 40px; line-height: 40px;background: #a98555; width: 480px;}
+.s_gz_list li span a{display: block; width: 300px; color: #FFF; margin-left: 20px;}
+.s_gz .s_gs_hd{position: absolute; right: 20px; bottom: 7px; z-index: 99999;}
+.s_gz .s_gs_hd li{border-radius: 50%; width: 8px; height: 8px;background: #d4c2aa; display: inline-block; margin-left: 5px; line-height: 100px; overflow: hidden;cursor: pointer;}
+.s_gz .s_gs_hd .on{background: #FFF;}
+
+.s_xm{background: url("../images/bg01.jpg") no-repeat top center; width: 100%; min-width: 1200px; height:705px;}
+.s_xm_con{width:1200px; margin:0 auto; padding-top: 1px;}
+.s_xm_list{ margin-top: 200px; overflow: hidden;}
+.s_xm_list li{background: url("../images/jd-bg01.jpg") no-repeat; width: 380px; height: 368px; float: left;}
+.s_xm_list li:nth-child(2){margin: 0px 20px;}
+.s_xm_list li:hover{background: url("../images/jd-bg02.jpg") no-repeat;}
+.s_xm_list li span{display: block; margin: 10px;height: 236px;}
+.s_xm_list li samp{display: block; text-align: center; overflow: hidden;}
+.s_xm_list li:hover a samp{color: #FFF;}
+.s_xm_list li a samp{display: block; height: 112px;}
+.s_xm_list li a samp h3{font-size: 18px; margin-top: 20px;}
+.s_xm_list li a samp i{ border: 1px solid #927447; border-radius: 10px;display: inline-block;padding: 3px 20px; margin-top: 10px;}
+.s_xm_list li:hover a samp i{ border: 1px solid #FFF;}
+
+.s_xm_more{text-align: center; margin-top: 50px;}
+.s_xm_more a:hover img{opacity: 0.8;}
+
